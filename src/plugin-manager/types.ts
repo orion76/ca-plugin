@@ -1,5 +1,4 @@
-import {IPlugin, IPluginBuilder} from '../plugin/types';
-import {IPluginDiscovery} from '../discovery/types';
+import { IPlugin } from '../plugin/types';
 
 
 export interface IPluginManager<P extends IPlugin = IPlugin> {
@@ -8,13 +7,5 @@ export interface IPluginManager<P extends IPlugin = IPlugin> {
 	getDefinitions(): P['definition'][];
 
 	getInstance(pluginId: string): P
-
-	setPluginBuilder(pluginBuilder: IPluginBuilder): void;
-
-	setDiscovery(discovery: IPluginDiscovery): void;
-
-	pluginBuilder: IPluginBuilder;
-
-	discovery: IPluginDiscovery;
 }
 

@@ -1,0 +1,14 @@
+import { IPlugin, IPluginBuilder, IPluginDiscovery, PluginManagerBase } from "../../src";
+import { PluginDiscoveryTest } from "../plugin-discovery/plugin-discovery.class";
+
+
+interface IPluginTest extends IPlugin {
+
+}
+const TEST_PLUGIN_TYPE = 'TEST_PLUGIN_TYPE';
+
+export class PluginManagerTest extends PluginManagerBase<IPluginTest> {
+    pluginType = TEST_PLUGIN_TYPE;
+    protected readonly discovery: IPluginDiscovery = new PluginDiscoveryTest();
+    protected readonly pluginBuilder: IPluginBuilder
+}

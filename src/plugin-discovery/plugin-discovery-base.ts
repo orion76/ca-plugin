@@ -2,12 +2,12 @@ import {IPluginDiscovery} from './types';
 import {IPluginDefinition} from '../plugin/types';
 
 
-export abstract class DiscoveryBase implements IPluginDiscovery {
+export abstract class PluginDiscoveryBase implements IPluginDiscovery {
 
-	protected _definitions: IPluginDefinition[] = [];
+	protected abstract definitions: IPluginDefinition[];
 
 	getDefinition(pluginId: string, exceptionOnInvalid: boolean): IPluginDefinition | undefined {
-		const definition = this._definitions.find((definition) => definition.id === pluginId);
+		const definition = this.definitions.find((definition) => definition.id === pluginId);
 		if (exceptionOnInvalid && !definition) {
 			throw new Error(`Plugin definition not found. ID:${pluginId}`);
 		}
@@ -15,7 +15,7 @@ export abstract class DiscoveryBase implements IPluginDiscovery {
 	}
 
 	getDefinitions(): IPluginDefinition[] {
-		return this._definitions;
+		return this.definitions;
 	}
 
 	hasDefinition(pluginId: string): boolean {

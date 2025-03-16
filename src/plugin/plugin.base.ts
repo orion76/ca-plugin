@@ -1,4 +1,5 @@
-import {IPlugin, IPluginDefinition} from './types';
+import { IPluginDefinition, IPlugin } from "./types";
+
 
 
 export abstract class PluginBase<D extends IPluginDefinition> implements IPlugin {

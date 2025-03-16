@@ -1,28 +1,20 @@
-import {PluginInstanceNotCreatedException} from '../exceptions/plugin-instance-not-created';
-import {IPluginDiscovery} from '../discovery/types';
-import {IPluginManager} from './types';
-import {IPlugin, IPluginBuilder, IPluginDefinition} from '../plugin/types';
+import { PluginInstanceNotCreatedException } from '../exceptions/plugin-instance-not-created';
+import { IPluginDiscovery } from '../plugin-discovery/types';
+import { IPluginManager } from './types';
+import { IPlugin, IPluginBuilder } from '../plugin/types';
 
 
 export abstract class PluginManagerBase<P extends IPlugin> implements IPluginManager<P> {
 	_instances = new Map<string, IPlugin>();
 
-	abstract get pluginType(): string
-
-	protected _discovery!: IPluginDiscovery;
-	protected _pluginBuilder!: IPluginBuilder;
+	abstract readonly pluginType: string
 
 	getDefinition(pluginId: string): P['definition'] | undefined {
 		return this.discovery.getDefinition(pluginId, true);
 	}
 
-	get discovery(): IPluginDiscovery {
-		return this._discovery;
-	}
-
-	get pluginBuilder(): IPluginBuilder {
-		return this._pluginBuilder;
-	}
+	protected abstract readonly discovery: IPluginDiscovery;
+	protected abstract readonly pluginBuilder: IPluginBuilder;
 
 	getDefinitions<P extends IPlugin = IPlugin>(): P['definition'][] {
 		return this.discovery.getDefinitions();
@@ -47,13 +39,5 @@ export abstract class PluginManagerBase<P extends IPlugin> implements IPluginMan
 			}
 		}
 		return this._instances.get(pluginId) as P;
-	}
-
-	setPluginBuilder(pluginBuilder: IPluginBuilder) {
-		this._pluginBuilder = pluginBuilder;
-	}
-
-	setDiscovery(discovery: IPluginDiscovery) {
-		this._discovery = discovery;
 	}
 }

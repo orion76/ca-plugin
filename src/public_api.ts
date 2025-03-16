@@ -1,5 +1,5 @@
-export * from './discovery/types';
-export * from './discovery/discovery-base';
+export * from './plugin-discovery/types';
+export * from './plugin-discovery/plugin-discovery-base';
 
 export * from './plugin/types';
 export * from './plugin/plugin.base';
