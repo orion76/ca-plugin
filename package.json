@@ -8,7 +8,7 @@
     "version-update": "npm version patch",
     "build": "npm run version-update && tsc",
     "dev": "tsc --watch",
-    "test": "jest"
+    "test": "jest --watch --verbose"
   },
   "author": "Paul Glazkow",
   "license": "ISC",

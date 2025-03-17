@@ -1,21 +1,6 @@
-import { IPlugin, IPluginBuilder, IType } from "../../src";
+import { PluginBuilderBase } from "../../src";
+import { PluginTestThree } from "./plugin.class";
 
-
-export interface IPluginTest extends IPlugin {
-
-}
-const TEST_PLUGIN_TYPE = 'TEST_PLUGIN_TYPE';
-
-
-
-
-export class PluginBuilderTest<P extends IPlugin> implements IPluginBuilder<P> {
-    build(definition: P['definition']): P {
-        if (!definition.pluginClass) {
-            throw new Error('Plugin build')
-        }
-        const pluginClass = definition.pluginClass as IType<P>
-
-        return new pluginClass(definition);
-    }
+export class PluginBuilderTest extends PluginBuilderBase<PluginTestThree> {
+    protected override  defaultPluginClass = PluginTestThree;
 }

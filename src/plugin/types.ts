@@ -1,27 +1,25 @@
-export interface IType<T> {
-	new(...args: unknown[]): T;
+export interface IType<T> extends Function {
+	new(...args: any[]): T;
 }
 
-export interface IPluginDefinition<D extends unknown = unknown> {
+export interface IPluginDefinition<Data extends any = any, P extends IPlugin<Data> = IPlugin> {
 	type: string;
 	id: string;
 	label: string;
-	pluginClass?: IType<unknown>;
+	pluginClass?: IType<P>;
+	pluginFactory?: TPluginFactory<P>;
 	disabled?: boolean;
-	data?: D
+	data?: Data
 }
 
-
-
-export interface IPlugin<D extends unknown = unknown> {
+export interface IPlugin<Data extends any = any> {
 	id: string;
-
 	label: string;
+	definition: IPluginDefinition<Data>
+}
 
-	definition: IPluginDefinition<D>
-}
-type TPluginDefinition<D extends IPluginDefinition<P>, P extends IPlugin<D>> = D
-export type TPlugin<P extends IPlugin<D> = IPlugin<D>, D extends IPluginDefinition<P> = IPluginDefinition<P>> = P
-export interface IPluginBuilder<P extends TPlugin = TPlugin> {
-	build(definition: P['definition']): P;
-}
+
+
+export type TPluginDefinition<P extends IPlugin> = P['definition'];
+
+export type TPluginFactory<P extends IPlugin> = (definition: TPluginDefinition<P>) => P;
