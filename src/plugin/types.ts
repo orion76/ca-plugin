@@ -18,8 +18,7 @@ export interface IPlugin<Data extends any = any> {
 	definition: IPluginDefinition<Data>
 }
 
-
-
 export type TPluginDefinition<P extends IPlugin> = P['definition'];
 
-export type TPluginFactory<P extends IPlugin> = (definition: TPluginDefinition<P>) => P;
+export type TPluginFactory<P extends IPlugin> = (definition: TPluginDefinition<P>, ...vars: any[]) => P;
+

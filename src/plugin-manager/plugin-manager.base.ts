@@ -2,7 +2,7 @@ import { PluginInstanceNotCreatedException } from '../exceptions/plugin-instance
 import { IPluginDiscovery } from '../plugin-discovery/types';
 import { IPluginManager } from './types';
 import { IPlugin } from '../plugin/types';
-import { IPluginBuilder } from 'src/plugin-builder/types';
+import { IPluginBuilder } from '../plugin-builder/types';
 
 
 export abstract class PluginManagerBase<P extends IPlugin> implements IPluginManager<P> {
@@ -11,14 +11,14 @@ export abstract class PluginManagerBase<P extends IPlugin> implements IPluginMan
 	abstract readonly pluginType: string
 
 	getDefinition(pluginId: string): P['definition'] | undefined {
-		return this.discovery.getDefinition(pluginId, true);
+		return this.pluginDiscovery.getDefinition(pluginId, true);
 	}
 
-	protected abstract readonly discovery: IPluginDiscovery;
+	protected abstract readonly pluginDiscovery: IPluginDiscovery;
 	protected abstract readonly pluginBuilder: IPluginBuilder;
 
 	getDefinitions<P extends IPlugin = IPlugin>(): P['definition'][] {
-		return this.discovery.getDefinitions();
+		return this.pluginDiscovery.getDefinitions();
 	}
 
 	/**

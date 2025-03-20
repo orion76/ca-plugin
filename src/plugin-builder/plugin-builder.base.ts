@@ -1,25 +1,26 @@
-import { IPlugin, IType, TPluginDefinition, TPluginFactory } from "src/plugin/types";
+import { IPlugin, IType, TPluginDefinition, TPluginFactory } from "../plugin/types";
 import { IPluginBuilder } from "./types";
-
+import { Type } from "@angular/core";
 
 
 export abstract class PluginBuilderBase<P extends IPlugin> implements IPluginBuilder<P> {
 
 	protected defaultPluginClass?: IType<P>;
-
+	protected factory: TPluginFactory<P> = (definition: TPluginDefinition<P>) => {
+		return new (definition.pluginClass as Type<P>)(definition);
+	};
 
 	build(definition: TPluginDefinition<P>): P {
 		let factory: TPluginFactory<P>;
-		if (definition.pluginClass) {
-			const pluginClass = definition.pluginClass as IType<P>;
-			factory = (_definition: TPluginDefinition<P>) => new pluginClass(_definition);
-		} else if (definition.pluginFactory) {
 
+		if (typeof definition.pluginFactory === 'function') {
 			factory = definition.pluginFactory as unknown as TPluginFactory<P>;
-
 		} else {
-			const defaultClass = this.defaultPluginClass as IType<P>
-			factory = (_definition: TPluginDefinition<P>) => new defaultClass(_definition);
+
+			if (!definition.pluginClass && this.defaultPluginClass) {
+				definition.pluginClass = this.defaultPluginClass;
+			}
+			factory = this.factory;
 		}
 
 		if (typeof factory !== 'function') {
@@ -28,10 +29,4 @@ export abstract class PluginBuilderBase<P extends IPlugin> implements IPluginBui
 
 		return factory(definition);
 	}
-
-
-	private _buildFromPluginClass(pluginClass: IType<P>) {
-
-	}
-
 }

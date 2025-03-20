@@ -1,4 +1,4 @@
-import { IPlugin, TPluginDefinition } from "src/plugin/types";
+import { IPlugin, TPluginDefinition } from "../plugin/types";
 
 
 export interface IPluginBuilder<P extends IPlugin = IPlugin> {

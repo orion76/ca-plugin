@@ -10,6 +10,6 @@ const TEST_PLUGIN_TYPE = 'TEST_PLUGIN_TYPE';
 
 export class PluginManagerTest extends PluginManagerBase<IPluginTest> {
     pluginType = TEST_PLUGIN_TYPE;
-    protected readonly discovery: IPluginDiscovery = new PluginDiscoveryTest();
+    protected readonly pluginDiscovery: IPluginDiscovery = new PluginDiscoveryTest();
     protected readonly pluginBuilder: IPluginBuilder = new PluginBuilderTest()
 }
