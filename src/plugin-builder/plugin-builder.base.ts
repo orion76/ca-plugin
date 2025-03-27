@@ -11,22 +11,10 @@ export abstract class PluginBuilderBase<P extends IPlugin> implements IPluginBui
 	};
 
 	build(definition: TPluginDefinition<P>): P {
-		let factory: TPluginFactory<P>;
-
-		if (typeof definition.pluginFactory === 'function') {
-			factory = definition.pluginFactory as unknown as TPluginFactory<P>;
-		} else {
-
-			if (!definition.pluginClass && this.defaultPluginClass) {
-				definition.pluginClass = this.defaultPluginClass;
-			}
-			factory = this.factory;
+		if (!definition.pluginClass && this.defaultPluginClass) {
+			definition.pluginClass = this.defaultPluginClass;
 		}
 
-		if (typeof factory !== 'function') {
-			throw new Error(`PluginBuilder. Plugin type: ${definition.type}. Plugin factory for plugin ID ${definition.id} (${definition.label}) is missint`);
-		}
-
-		return factory(definition);
+		return this.factory(definition);
 	}
 }

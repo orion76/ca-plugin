@@ -2,9 +2,9 @@ import { IPluginDefinition, IPlugin } from "./types";
 
 
 
-export abstract class PluginBase<D extends unknown> implements IPlugin {
+export abstract class PluginBase implements IPlugin {
 
-	abstract get definition(): IPluginDefinition<D> ;
+	abstract get definition(): IPluginDefinition;
 
 	get id() {
 		return this.definition.id;

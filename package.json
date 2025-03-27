@@ -5,15 +5,21 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint  ./src --ext .ts",
     "version-update": "npm version patch",
     "build": "npm run version-update && ng build",
-    "dev": "tsc --watch",
-    "test": "jest --watch --verbose"
+    "test:console": "ng test --karma-config karma-terminal.conf.js",
+    "test:browser": "ng test --karma-config karma.conf.js"
   },
   "author": "Paul Glazkow",
   "license": "ISC",
   "peerDependencies": {
-    "@angular/core": "^19.2.0"
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.6.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "karma-spec-reporter": "0.0.36"
   }
 }
