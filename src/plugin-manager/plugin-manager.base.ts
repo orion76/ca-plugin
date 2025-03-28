@@ -1,8 +1,8 @@
 import { PluginInstanceNotCreatedException } from '../exceptions/plugin-instance-not-created';
-import { IPluginDiscovery } from '../plugin-discovery/types';
-import { IPluginManager } from './types';
-import { IPlugin } from '../plugin/types';
-import { IPluginBuilder } from '../plugin-builder/types';
+import { IPluginDiscovery } from '../types';
+import { IPluginManager } from '../types';
+import { IPlugin } from '../types';
+import { IPluginBuilder } from "../types";
 
 
 export abstract class PluginManagerBase<P extends IPlugin> implements IPluginManager<P> {

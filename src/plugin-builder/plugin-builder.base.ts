@@ -1,5 +1,5 @@
-import { IPlugin, IType, TPluginDefinition, TPluginFactory } from "../plugin/types";
-import { IPluginBuilder } from "./types";
+import { IPlugin, IType, TPluginDefinition, TPluginFactory } from "../types";
+import { IPluginBuilder } from "../types";
 import { Type } from "@angular/core";
 
 

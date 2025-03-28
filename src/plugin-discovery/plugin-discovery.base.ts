@@ -1,5 +1,5 @@
-import {IPluginDiscovery} from './types';
-import {IPluginDefinition} from '../plugin/types';
+import { IPluginDiscovery } from '../types';
+import {IPluginDefinition} from '../types';
 
 
 export abstract class PluginDiscoveryBase implements IPluginDiscovery {

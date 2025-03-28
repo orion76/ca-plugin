@@ -1,4 +1,4 @@
-import { IPluginDefinition, IPlugin } from "./types";
+import { IPluginDefinition, IPlugin } from "../types";
 
 
 
